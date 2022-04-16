@@ -27,9 +27,18 @@ export default function App() {
     setAlert({ show, msg, type });
   };
 
+  const removeAll = () => {
+    setList([]);
+  };
+
+  const deletList = (id) => {
+    showAlert(true, "Item Deleted", "danger");
+    setList(list.filter((item) => item.id !== id));
+  };
+
   return (
     <div className="App">
-      <Alert />
+      {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
       <h1>My To Do App</h1>
       <div>
         <form onSubmit={handleSubmit}>
@@ -43,7 +52,15 @@ export default function App() {
           <button type="submit">{isEdit ? "Edit" : "Submit"}</button>
         </form>
       </div>
-      <List item={list} />
+
+      {list.length > 0 && (
+        <div>
+          <List item={list} deletList={deletList} />
+          <button className="clear-btn" onClick={removeAll}>
+            Clear All
+          </button>
+        </div>
+      )}
     </div>
   );
 }

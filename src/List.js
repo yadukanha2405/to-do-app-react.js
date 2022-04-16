@@ -1,19 +1,25 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-export default function List({ item }) {
+export default function List({ item, deletList }) {
   return (
     <div>
       {item.map((item) => {
-        const { title, id } = item;
+        const { id, title } = item;
         return (
-          <div>
-            <p key={id}> {title} </p>
-            <button>
-              <FaEdit />
-            </button>
-            <button>
-              <FaTrash />
-            </button>
+          <div key={id}>
+            <p> {title} </p>
+            <div>
+              <button type="button" className="edit-btn">
+                <FaEdit />
+              </button>
+              <button
+                type="button"
+                className="delete-btn"
+                onClick={() => deletList(id)}
+              >
+                <FaTrash />
+              </button>
+            </div>
           </div>
         );
       })}
