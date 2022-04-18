@@ -2,13 +2,13 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 export default function List({ item, deletList, editItem }) {
   return (
-    <div>
+    <div className="grocery-list">
       {item.map((item) => {
         const { id, title } = item;
         return (
-          <div key={id}>
-            <p> {title} </p>
-            <div>
+          <article className="grocery-item" key={id}>
+            <p className="title"> {title} </p>
+            <div className="btn-container">
               <button
                 type="button"
                 className="edit-btn"
@@ -24,7 +24,7 @@ export default function List({ item, deletList, editItem }) {
                 <FaTrash />
               </button>
             </div>
-          </div>
+          </article>
         );
       })}
     </div>

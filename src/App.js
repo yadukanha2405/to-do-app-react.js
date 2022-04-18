@@ -50,7 +50,7 @@ export default function App() {
   };
 
   const removeAll = () => {
-    showAlert(true, "Removed all items", "danger");
+    showAlert(true, " All items removed", "danger");
     setList([]);
   };
 
@@ -77,30 +77,33 @@ export default function App() {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
   return (
-    <div className="App">
-      {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
-      <h1>My To Do App</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
+    <section className="section-center">
+      <form onSubmit={handleSubmit}>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
+        <h4>My To Do App</h4>
+        <div className="form-control">
           <input
+            className="grocery"
             type="text"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
             }}
           />
-          <button type="submit">{isEdit ? "Edit" : "Submit"}</button>
-        </form>
-      </div>
+          <button className="submit-btn" type="submit">
+            {isEdit ? "Edit" : "Submit"}
+          </button>
+        </div>
+      </form>
 
       {list.length > 0 && (
-        <div>
+        <div className="grocery-container">
           <List item={list} deletList={deletList} editItem={editItem} />
           <button className="clear-btn" onClick={removeAll}>
             Clear All
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
